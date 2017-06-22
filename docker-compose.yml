@@ -40,7 +40,7 @@ services:
       - mongocfg1
     command: mongos --configdb mongorscfg/mongocfg1:27017 --port 27017
     ports:
-      - 27017:27017
+        - 127.0.0.1:27017:27017
     volumes:
       - /etc/localtime:/etc/localtime:ro
 
