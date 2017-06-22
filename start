@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cd "`dirname "$0"`"
+
+export DATA_DIR=./data
+
+docker-compose up -d
+
+sleep 5
+
+./initiate
+

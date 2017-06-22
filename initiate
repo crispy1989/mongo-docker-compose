@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ -f data/initiated ]; then
+	echo 'Already initiated'
+	exit
+fi
+
 function mongoExec() {
 	HOST="$1"
 	MONGOCMD="$2"
@@ -10,7 +15,7 @@ function mongoExec() {
 echo 'Initializing config replica set'
 mongoExec mongocfg1 'rs.initiate({ _id: "mongorscfg", configsvr: true, members: [ { _id: 0, host: "mongocfg1:27017"  } ] })'
 
-sleep 2
+sleep 3
 
 echo 'Initializing rs1'
 mongoExec mongors1n1 'rs.initiate({ _id: "mongors1", members: [ { _id: 0, host: "mongors1n1:27017"  } ] })'
@@ -18,7 +23,11 @@ mongoExec mongors1n1 'rs.initiate({ _id: "mongors1", members: [ { _id: 0, host: 
 echo 'Initializing rs2'
 mongoExec mongors2n1 'rs.initiate({ _id: "mongors2", members: [ { _id: 0, host: "mongors2n1:27017"  } ] })'
 
+sleep 3
+
 echo 'Initializing shards'
 mongoExec mongos1 'sh.addShard("mongors1/mongors1n1:27017")'
 mongoExec mongos1 'sh.addShard("mongors2/mongors2n1:27017")'
+
+touch data/initiated
 

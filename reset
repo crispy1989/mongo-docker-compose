@@ -1,9 +1,11 @@
 #!/bin/bash
 
+rm -f data/initiated
+
 dirs=( mongocfg1  mongors1n1  mongors2n1 )
 for d in ${dirs[@]}; do
   echo "Resetting data/$d"
-  rm -rf data/$d
+  sudo rm -rf data/$d
   mkdir data/$d
   touch data/$d/.gitkeep
 done
