@@ -3,9 +3,9 @@ This repository provides a fully sharded mongo environment using docker-compose 
 
 The MongoDB environment consists of the following docker containers
 
- - **mongosrs(1-3)n(1-3)**: Mongod data server with three replica sets containing 3 nodes each (9 containers)
- - **mongocfg(1-3)**: Stores metadata for sharded data distribution (3 containers)
- - **mongos(1-2)**: Mongo routing service to connect to the cluster through (1 container)
+ - **mongors(1-2)n1**: Mongod data server with 2 replica sets containing 1 node each
+ - **mongocfg1**: Stores metadata for sharded data distribution
+ - **mongos1*: Mongo routing service to connect to the cluster through
 
 ## Caveats
 
@@ -30,7 +30,7 @@ The MongoDB environment consists of the following docker containers
 
 ### Check out the repository
 
-    git clone git@github.com:singram/mongo-docker-compose.git
+    git clone git@github.com:crispy1989/mongo-docker-compose.git
     cd mongo-docker-compose
 
 
